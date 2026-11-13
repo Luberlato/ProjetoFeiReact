@@ -1,0 +1,117 @@
+import { StyleSheet } from 'react-native';
+import { theme } from './theme';
+
+export const commonStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.background,
+  },
+  safeArea: {
+    flex: 1,
+    backgroundColor: theme.colors.background,
+  },
+  headerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: theme.spacing.xl,
+    paddingVertical: theme.spacing.lg,
+    backgroundColor: theme.colors.surface,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.border,
+  },
+  headerTitle: {
+    fontSize: theme.typography.sizes.xl,
+    fontWeight: '700',
+    color: theme.colors.textPrimary,
+  },
+  headerSubtitle: {
+    fontSize: theme.typography.sizes.sm,
+    color: theme.colors.textSecondary,
+    marginTop: 2,
+  },
+  card: {
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.borderRadius.lg,
+    padding: theme.spacing.lg,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    ...theme.shadows.card,
+  },
+  badge: {
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.xs,
+    borderRadius: theme.borderRadius.pill,
+    alignSelf: 'flex-start',
+  },
+  badgeText: {
+    fontSize: theme.typography.sizes.xs,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+  },
+  ratingBadge: {
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.xs,
+    borderRadius: theme.borderRadius.md,
+    backgroundColor: theme.colors.accentLight,
+    borderWidth: 1,
+    borderColor: theme.colors.accent,
+  },
+  ratingBadgeText: {
+    fontSize: theme.typography.sizes.sm,
+    fontWeight: '800',
+    color: theme.colors.accentDark,
+  },
+  primaryButton: {
+    backgroundColor: theme.colors.primary,
+    borderRadius: theme.borderRadius.md,
+    paddingVertical: theme.spacing.md,
+    paddingHorizontal: theme.spacing.xl,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    ...theme.shadows.sm,
+  },
+  primaryButtonText: {
+    color: theme.colors.textWhite,
+    fontSize: theme.typography.sizes.md,
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+  secondaryButton: {
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.borderRadius.md,
+    paddingVertical: theme.spacing.md,
+    paddingHorizontal: theme.spacing.xl,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: theme.colors.borderStrong,
+  },
+  secondaryButtonText: {
+    color: theme.colors.textSecondary,
+    fontSize: theme.typography.sizes.md,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  centerContent: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: theme.spacing.xl,
+  },
+  emptyTitle: {
+    fontSize: theme.typography.sizes.lg,
+    fontWeight: '700',
+    color: theme.colors.textPrimary,
+    marginTop: theme.spacing.md,
+  },
+  emptySubtitle: {
+    fontSize: theme.typography.sizes.sm,
+    color: theme.colors.textMuted,
+    textAlign: 'center',
+    marginTop: theme.spacing.xs,
+    paddingHorizontal: theme.spacing.xl,
+  },
+});
