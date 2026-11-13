@@ -42,10 +42,12 @@ export default function LoginScreen({ navigation }) {
     setLoading(false);
 
     if (result.success) {
-      Alert.alert(
-        'Sucesso',
-        isRegistering ? 'Conta criada com sucesso!' : 'Login realizado com sucesso!'
-      );
+      if (isRegistering) {
+        Alert.alert('Sucesso', 'Conta criada com sucesso! Agora clique em Entrar.');
+        setIsRegistering(false);
+      } else {
+        navigation.replace('Dashboard');
+      }
     } else {
       Alert.alert('Aviso', result.message);
     }
