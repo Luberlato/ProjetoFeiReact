@@ -13,6 +13,18 @@ import { db } from './firebase';
 
 const COLLECTION_NAME = 'players';
 
+// Nota = média aritmética dos atributos dividida por 10 (escala 0 a 10)
+export function calculateRating(stats = {}) {
+  const values = [stats.pace, stats.passing, stats.shooting, stats.physical].map(
+    (v) => Number(v) || 0
+  );
+  const average = values.reduce((acc, v) => acc + v, 0) / values.length;
+  return Number((average / 10).toFixed(1));
+}
+
+// Garante que a nota exibida sempre reflita os atributos atuais
+const withRating = (player) => ({ ...player, rating: calculateRating(player.stats) });
+
 const INITIAL_PLAYERS = [
   {
     name: 'Lucas Silva',
@@ -75,17 +87,17 @@ export async function getPlayers() {
     
     if (snapshot.empty) {
       await seedInitialData();
-      return INITIAL_PLAYERS.map((p, idx) => ({ id: `init_${idx}`, ...p }));
+      return INITIAL_PLAYERS.map((p, idx) => withRating({ id: `init_${idx}`, ...p }));
     }
 
     const players = [];
     snapshot.forEach(docSnap => {
-      players.push({ id: docSnap.id, ...docSnap.data() });
+      players.push(withRating({ id: docSnap.id, ...docSnap.data() }));
     });
     return players;
   } catch (error) {
     console.log('Erro ao buscar jogadores:', error);
-    return INITIAL_PLAYERS.map((p, idx) => ({ id: `local_${idx}`, ...p }));
+    return INITIAL_PLAYERS.map((p, idx) => withRating({ id: `local_${idx}`, ...p }));
   }
 }
 
@@ -94,14 +106,14 @@ export async function getPlayerById(id) {
     const docRef = doc(db, COLLECTION_NAME, id);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      return { id: docSnap.id, ...docSnap.data() };
+      return withRating({ id: docSnap.id, ...docSnap.data() });
     }
     const found = INITIAL_PLAYERS.find((_, idx) => `init_${idx}` === id || `local_${idx}` === id);
-    return found ? { id, ...found } : null;
+    return found ? withRating({ id, ...found }) : null;
   } catch (error) {
     console.log('Erro ao buscar jogador:', error);
     const found = INITIAL_PLAYERS.find((_, idx) => `init_${idx}` === id || `local_${idx}` === id);
-    return found ? { id, ...found } : null;
+    return found ? withRating({ id, ...found }) : null;
   }
 }
 
@@ -110,7 +122,6 @@ export async function addPlayer(playerData) {
     ...playerData,
     number: Number(playerData.number) || 0,
     age: Number(playerData.age) || 20,
-    rating: Number(playerData.rating) || 7.0,
     matches: 0,
     goals: 0,
     assists: 0,
@@ -123,6 +134,7 @@ export async function addPlayer(playerData) {
     },
     createdAt: new Date().toISOString(),
   };
+  newPlayer.rating = calculateRating(newPlayer.stats);
 
   try {
     const docRef = await addDoc(collection(db, COLLECTION_NAME), newPlayer);
@@ -136,7 +148,10 @@ export async function addPlayer(playerData) {
 export async function updatePlayer(id, updatedFields) {
   try {
     const docRef = doc(db, COLLECTION_NAME, id);
-    await updateDoc(docRef, updatedFields);
+    const fields = updatedFields.stats
+      ? { ...updatedFields, rating: calculateRating(updatedFields.stats) }
+      : updatedFields;
+    await updateDoc(docRef, fields);
     return true;
   } catch (error) {
     console.log('Erro ao atualizar jogador:', error);
@@ -164,14 +179,10 @@ export async function registerMatchScout(playerId, matchData) {
     const newGoals = (player.goals || 0) + (Number(matchData.goals) || 0);
     const newAssists = (player.assists || 0) + (Number(matchData.assists) || 0);
 
-    const oldTotalRating = (player.rating || 7.0) * (player.matches || 1);
-    const newRating = Number(((oldTotalRating + Number(matchData.rating)) / newMatches).toFixed(1));
-
     const updated = {
       matches: newMatches,
       goals: newGoals,
       assists: newAssists,
-      rating: newRating,
     };
 
     await updatePlayer(playerId, updated);

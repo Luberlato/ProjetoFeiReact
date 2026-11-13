@@ -8,6 +8,7 @@ import LoginScreen from './src/screens/LoginScreen';
 import DashboardScreen from './src/screens/DashboardScreen';
 import PlayerListScreen from './src/screens/PlayerListScreen';
 import PlayerDetailScreen from './src/screens/PlayerDetailScreen';
+import PlayerFormScreen from './src/screens/PlayerFormScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ export default function App() {
           <Stack.Screen name="Dashboard" component={DashboardScreen} />
           <Stack.Screen name="PlayerList" component={PlayerListScreen} />
           <Stack.Screen name="PlayerDetail" component={PlayerDetailScreen} />
+          <Stack.Screen name="PlayerForm" component={PlayerFormScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
