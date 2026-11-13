@@ -1,0 +1,162 @@
+import { StyleSheet } from 'react-native';
+import { theme } from './theme';
+
+export const talentScanStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.background,
+  },
+  scrollContent: {
+    paddingVertical: theme.spacing.xl,
+    paddingHorizontal: theme.spacing.lg,
+    alignItems: 'center',
+  },
+  contentWrapper: {
+    width: '100%',
+    maxWidth: 480,
+    alignSelf: 'center',
+  },
+  topBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: theme.spacing.xl,
+    paddingBottom: theme.spacing.sm,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.border,
+  },
+  backButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: theme.colors.surfaceSubtle,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    marginRight: theme.spacing.md,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: '800',
+    color: theme.colors.textPrimary,
+    letterSpacing: -0.5,
+  },
+  subtitle: {
+    fontSize: 13,
+    color: theme.colors.textSecondary,
+    marginTop: 2,
+  },
+  scanCard: {
+    alignItems: 'center',
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.borderRadius.lg,
+    padding: theme.spacing.xxl,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    marginBottom: theme.spacing.xl,
+    ...theme.shadows.card,
+  },
+  scanIconBox: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    backgroundColor: theme.colors.primarySoft,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: theme.spacing.md,
+  },
+  scanIconBoxFound: {
+    backgroundColor: theme.colors.warningLight,
+  },
+  scanTitle: {
+    fontSize: 17,
+    fontWeight: '800',
+    color: theme.colors.textPrimary,
+    textAlign: 'center',
+  },
+  scanHint: {
+    fontSize: 13,
+    color: theme.colors.textSecondary,
+    textAlign: 'center',
+    marginTop: theme.spacing.xs,
+    marginBottom: theme.spacing.lg,
+  },
+  scanButton: {
+    width: '100%',
+  },
+  playerCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.borderRadius.md,
+    padding: theme.spacing.md,
+    marginBottom: theme.spacing.sm,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    ...theme.shadows.sm,
+  },
+  playerCardScanning: {
+    borderColor: theme.colors.primaryLight,
+    backgroundColor: theme.colors.primarySoft,
+  },
+  playerCardFound: {
+    borderColor: theme.colors.warning,
+    backgroundColor: theme.colors.warningLight,
+  },
+  playerAvatar: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: theme.colors.surfaceSubtle,
+    marginRight: theme.spacing.md,
+  },
+  playerInfo: {
+    flex: 1,
+  },
+  playerName: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: theme.colors.textPrimary,
+  },
+  playerSubtext: {
+    fontSize: 12,
+    color: theme.colors.textSecondary,
+    marginTop: 2,
+  },
+  ratingTag: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: theme.colors.accentLight,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: theme.borderRadius.sm,
+    borderWidth: 1,
+    borderColor: theme.colors.accent,
+    gap: 4,
+  },
+  ratingTagFound: {
+    backgroundColor: theme.colors.warning,
+    borderColor: theme.colors.warning,
+  },
+  ratingValue: {
+    fontSize: 13,
+    fontWeight: '800',
+    color: theme.colors.accentDark,
+  },
+  ratingValueFound: {
+    color: theme.colors.textWhite,
+  },
+  emptyBox: {
+    padding: theme.spacing.xl,
+    alignItems: 'center',
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.borderRadius.md,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+  },
+  emptyText: {
+    color: theme.colors.textMuted,
+    fontSize: 14,
+    textAlign: 'center',
+  },
+});

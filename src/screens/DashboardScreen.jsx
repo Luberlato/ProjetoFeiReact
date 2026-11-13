@@ -150,6 +150,22 @@ export default function DashboardScreen({ navigation }) {
           </View>
         </View>
 
+        {/* Atalho para a busca de craques (apito + vibração) */}
+        <TouchableOpacity
+          style={styles.drawShortcut}
+          onPress={() => navigation.navigate('TalentScan')}
+          activeOpacity={0.8}
+        >
+          <View style={styles.drawShortcutIcon}>
+            <Ionicons name="megaphone-outline" size={20} color={theme.colors.primary} />
+          </View>
+          <View style={styles.playerInfo}>
+            <Text style={styles.playerName}>Busca de Craques</Text>
+            <Text style={styles.playerSubtext}>O celular apita ao achar atleta nota 9+</Text>
+          </View>
+          <Ionicons name="chevron-forward" size={18} color={theme.colors.textMuted} />
+        </TouchableOpacity>
+
         {/* Destaques do Elenco (Top 3) */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Destaques do Elenco</Text>

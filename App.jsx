@@ -9,6 +9,7 @@ import DashboardScreen from './src/screens/DashboardScreen';
 import PlayerListScreen from './src/screens/PlayerListScreen';
 import PlayerDetailScreen from './src/screens/PlayerDetailScreen';
 import PlayerFormScreen from './src/screens/PlayerFormScreen';
+import TalentScanScreen from './src/screens/TalentScanScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,7 @@ export default function App() {
           <Stack.Screen name="PlayerList" component={PlayerListScreen} />
           <Stack.Screen name="PlayerDetail" component={PlayerDetailScreen} />
           <Stack.Screen name="PlayerForm" component={PlayerFormScreen} />
+          <Stack.Screen name="TalentScan" component={TalentScanScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
