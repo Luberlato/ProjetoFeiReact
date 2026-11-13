@@ -153,9 +153,13 @@ export default function DashboardScreen({ navigation }) {
         {/* Destaques do Elenco (Top 3) */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Destaques do Elenco</Text>
-          <View style={styles.sectionBadge}>
-            <Text style={styles.sectionBadgeText}>Top 3</Text>
-          </View>
+          <TouchableOpacity
+            style={styles.sectionBadge}
+            onPress={() => navigation.navigate('PlayerList')}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.sectionBadgeText}>Ver elenco</Text>
+          </TouchableOpacity>
         </View>
 
         {topPlayers.length === 0 ? (
