@@ -6,11 +6,10 @@ import {
   TouchableOpacity,
   Image,
   ActivityIndicator,
-  Alert,
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import { getPlayerById, deletePlayer } from '../services/playerService';
+import { getPlayerById } from '../services/playerService';
 import { playerDetailStyles as styles } from '../styles/playerDetail.styles';
 import { theme } from '../styles/theme';
 
@@ -34,20 +33,6 @@ export default function PlayerDetailScreen({ navigation, route }) {
         .finally(() => setLoading(false));
     }, [playerId])
   );
-
-  const handleDelete = () => {
-    Alert.alert('Excluir atleta', `Deseja excluir ${player.name}?`, [
-      { text: 'Cancelar', style: 'cancel' },
-      {
-        text: 'Excluir',
-        style: 'destructive',
-        onPress: async () => {
-          await deletePlayer(playerId);
-          navigation.goBack();
-        },
-      },
-    ]);
-  };
 
   if (loading) {
     return (
@@ -153,7 +138,7 @@ export default function PlayerDetailScreen({ navigation, route }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.secondaryButton, styles.deleteButton]}
-            onPress={handleDelete}
+            onPress={() => navigation.navigate('PlayerDelete', { playerId })}
           >
             <Ionicons name="trash-outline" size={18} color={theme.colors.danger} />
             <Text style={[styles.secondaryButtonText, styles.deleteButtonText]}>Excluir</Text>
