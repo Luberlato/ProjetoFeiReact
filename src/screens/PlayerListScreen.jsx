@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   Image,
   ActivityIndicator,
 } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { getPlayers } from '../services/playerService';
 import { playerListStyles as styles } from '../styles/playerList.styles';
@@ -21,11 +22,14 @@ export default function PlayerListScreen({ navigation }) {
   const [search, setSearch] = useState('');
   const [position, setPosition] = useState('Todos');
 
-  useEffect(() => {
-    getPlayers()
-      .then((data) => setPlayers(data || []))
-      .finally(() => setLoading(false));
-  }, []);
+  // Recarrega ao voltar de outras telas (ex.: após excluir um atleta)
+  useFocusEffect(
+    useCallback(() => {
+      getPlayers()
+        .then((data) => setPlayers(data || []))
+        .finally(() => setLoading(false));
+    }, [])
+  );
 
   const term = search.trim().toLowerCase();
   const filteredPlayers = players.filter(
